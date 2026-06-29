@@ -2,3 +2,5 @@
 .venv/
 .uv-cache/
 __pycache__/
+backend/.gradle/
+backend/build/

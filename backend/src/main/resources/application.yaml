@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:master_management;MODE=MySQL;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
+  servlet:
+    multipart:
+      max-file-size: 1MB
+      max-request-size: 1MB
+  sql:
+    init:
+      mode: always
+
+mybatis:
+  mapper-locations: classpath*:com/github/massakai/mastermanagement/infrastructure/persistence/category/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+app:
+  csv:
+    filename: product-categories.csv

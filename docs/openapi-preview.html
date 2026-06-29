@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Product Category Master Management API</title>
+  <style>
+    :root { color-scheme: light; --bg: #f5f1e8; --panel: #fffdf8; --ink: #1f2937; --muted: #6b7280; --line: #d6c7af; --accent: #0f766e; --get: #0f766e; --post: #b45309; --put: #1d4ed8; --patch: #7c3aed; --delete: #b91c1c; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", sans-serif; background: linear-gradient(180deg, #efe6d2 0%, #f8f5ee 100%); color: var(--ink); }
+    main { max-width: 1100px; margin: 0 auto; padding: 40px 20px 80px; }
+    .hero, .card { background: var(--panel); border: 1px solid var(--line); border-radius: 18px; box-shadow: 0 10px 30px rgba(80, 60, 30, 0.08); }
+    .hero { padding: 28px; margin-bottom: 24px; }
+    .meta { color: var(--muted); margin-top: 8px; }
+    .section-title { margin: 28px 0 12px; font-size: 1.3rem; }
+    .stack { display: grid; gap: 16px; }
+    .card { padding: 20px; }
+    .method { display: inline-block; min-width: 60px; padding: 4px 10px; border-radius: 999px; color: white; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; }
+    .method.get { background: var(--get); }
+    .method.post { background: var(--post); }
+    .method.put { background: var(--put); }
+    .method.patch { background: var(--patch); }
+    .method.delete { background: var(--delete); }
+    code { background: #f3eadb; padding: 2px 6px; border-radius: 6px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+    th, td { text-align: left; padding: 10px; border-bottom: 1px solid #eadfcd; vertical-align: top; }
+    th { color: var(--muted); font-weight: 600; width: 22%; }
+    ul { margin: 10px 0 0; padding-left: 18px; }
+    .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  </style>
+</head>
+<body>
+<main>
+  <section class="hero">
+    <h1>Product Category Master Management API</h1>
+    <p>商品カテゴリマスター管理システム MVP の API 定義。
+対象機能は商品カテゴリ一覧取得、CSV ダウンロード、CSV アップロードによる全件入れ替え更新とする。
+</p>
+    <div class="meta">OpenAPI 3.0.3 / version 1.0.0</div>
+  </section>
+  <h2 class="section-title">Endpoints</h2>
+  <section class="stack">
+  
+    <article class="card">
+      <div><span class="method get">get</span> <code>/api/categories</code></div>
+      <h3>商品カテゴリ一覧取得</h3>
+      <p>display_order 昇順、同順位は category_code 昇順で商品カテゴリ一覧を返す。</p>
+      <table>
+        <tr><th>operationId</th><td>listCategories</td></tr>
+        <tr><th>requestBody</th><td>-</td></tr>
+        <tr>
+          <th>responses</th>
+          <td>
+            <ul>
+            
+              <li><code>200</code> 正常</li>
+            
+              <li><code>500</code> </li>
+            
+            </ul>
+          </td>
+        </tr>
+      </table>
+    </article>
+  
+    <article class="card">
+      <div><span class="method get">get</span> <code>/api/categories/csv</code></div>
+      <h3>商品カテゴリ CSV ダウンロード</h3>
+      <p>現在のマスター内容を UTF-8 の CSV として返す。</p>
+      <table>
+        <tr><th>operationId</th><td>downloadCategoriesCsv</td></tr>
+        <tr><th>requestBody</th><td>-</td></tr>
+        <tr>
+          <th>responses</th>
+          <td>
+            <ul>
+            
+              <li><code>200</code> 正常</li>
+            
+              <li><code>500</code> </li>
+            
+            </ul>
+          </td>
+        </tr>
+      </table>
+    </article>
+  
+    <article class="card">
+      <div><span class="method post">post</span> <code>/api/categories/csv</code></div>
+      <h3>商品カテゴリ CSV アップロード</h3>
+      <p>CSV を検証し、正常時は商品カテゴリマスターを全件入れ替え更新する。</p>
+      <table>
+        <tr><th>operationId</th><td>uploadCategoriesCsv</td></tr>
+        <tr><th>requestBody</th><td>multipart/form-data</td></tr>
+        <tr>
+          <th>responses</th>
+          <td>
+            <ul>
+            
+              <li><code>200</code> 更新成功</li>
+            
+              <li><code>400</code> 入力エラーまたは CSV バリデーションエラー</li>
+            
+              <li><code>500</code> </li>
+            
+            </ul>
+          </td>
+        </tr>
+      </table>
+    </article>
+  
+  </section>
+  <h2 class="section-title">Schemas</h2>
+  <section class="grid">
+  
+    <article class="card">
+      <h3>Category</h3>
+      <div class="meta">type: object</div>
+      
+      <ul>
+      
+        <li><code>categoryCode</code> : string</li>
+      
+        <li><code>categoryName</code> : string</li>
+      
+        <li><code>displayOrder</code> : integer</li>
+      
+        <li><code>isActive</code> : boolean</li>
+      
+        <li><code>description</code> : string</li>
+      
+      </ul>
+      
+    </article>
+  
+    <article class="card">
+      <h3>CategoryListResponse</h3>
+      <div class="meta">type: object</div>
+      
+      <ul>
+      
+        <li><code>categories</code> : array</li>
+      
+      </ul>
+      
+    </article>
+  
+    <article class="card">
+      <h3>CategoryCsvUploadSuccessResponse</h3>
+      <div class="meta">type: object</div>
+      
+      <ul>
+      
+        <li><code>success</code> : boolean</li>
+      
+        <li><code>message</code> : string</li>
+      
+        <li><code>updatedCount</code> : integer</li>
+      
+      </ul>
+      
+    </article>
+  
+    <article class="card">
+      <h3>CategoryCsvUploadErrorResponse</h3>
+      <div class="meta">type: object</div>
+      
+      <ul>
+      
+        <li><code>success</code> : boolean</li>
+      
+        <li><code>message</code> : string</li>
+      
+        <li><code>errorCount</code> : integer</li>
+      
+        <li><code>errors</code> : array</li>
+      
+      </ul>
+      
+    </article>
+  
+    <article class="card">
+      <h3>CsvValidationError</h3>
+      <div class="meta">type: object</div>
+      
+      <ul>
+      
+        <li><code>rowNumber</code> : integer</li>
+      
+        <li><code>field</code> : string</li>
+      
+        <li><code>code</code> : string</li>
+      
+        <li><code>message</code> : string</li>
+      
+      </ul>
+      
+    </article>
+  
+    <article class="card">
+      <h3>ErrorResponse</h3>
+      <div class="meta">type: object</div>
+      
+      <ul>
+      
+        <li><code>code</code> : string</li>
+      
+        <li><code>message</code> : string</li>
+      
+      </ul>
+      
+    </article>
+  
+  </section>
+</main>
+</body>
+</html>

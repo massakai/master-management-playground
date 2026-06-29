@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ title }}</title>
+  <style>
+    :root { color-scheme: light; --bg: #f5f1e8; --panel: #fffdf8; --ink: #1f2937; --muted: #6b7280; --line: #d6c7af; --accent: #0f766e; --get: #0f766e; --post: #b45309; --put: #1d4ed8; --patch: #7c3aed; --delete: #b91c1c; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", sans-serif; background: linear-gradient(180deg, #efe6d2 0%, #f8f5ee 100%); color: var(--ink); }
+    main { max-width: 1100px; margin: 0 auto; padding: 40px 20px 80px; }
+    .hero, .card { background: var(--panel); border: 1px solid var(--line); border-radius: 18px; box-shadow: 0 10px 30px rgba(80, 60, 30, 0.08); }
+    .hero { padding: 28px; margin-bottom: 24px; }
+    .meta { color: var(--muted); margin-top: 8px; }
+    .section-title { margin: 28px 0 12px; font-size: 1.3rem; }
+    .stack { display: grid; gap: 16px; }
+    .card { padding: 20px; }
+    .method { display: inline-block; min-width: 60px; padding: 4px 10px; border-radius: 999px; color: white; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; }
+    .method.get { background: var(--get); }
+    .method.post { background: var(--post); }
+    .method.put { background: var(--put); }
+    .method.patch { background: var(--patch); }
+    .method.delete { background: var(--delete); }
+    code { background: #f3eadb; padding: 2px 6px; border-radius: 6px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+    th, td { text-align: left; padding: 10px; border-bottom: 1px solid #eadfcd; vertical-align: top; }
+    th { color: var(--muted); font-weight: 600; width: 22%; }
+    ul { margin: 10px 0 0; padding-left: 18px; }
+    .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  </style>
+</head>
+<body>
+<main>
+  <section class="hero">
+    <h1>{{ title }}</h1>
+    <p>{{ description }}</p>
+    <div class="meta">OpenAPI {{ openapi_version }} / version {{ api_version }}</div>
+  </section>
+  <h2 class="section-title">Endpoints</h2>
+  <section class="stack">
+  {% for endpoint in endpoints %}
+    <article class="card">
+      <div><span class="method {{ endpoint.method }}">{{ endpoint.method }}</span> <code>{{ endpoint.path }}</code></div>
+      <h3>{{ endpoint.summary }}</h3>
+      <p>{{ endpoint.description }}</p>
+      <table>
+        <tr><th>operationId</th><td>{{ endpoint.operation_id or "-" }}</td></tr>
+        <tr><th>requestBody</th><td>{{ endpoint.request_body | join(", ") if endpoint.request_body else "-" }}</td></tr>
+        <tr>
+          <th>responses</th>
+          <td>
+            <ul>
+            {% for response in endpoint.responses %}
+              <li><code>{{ response.status }}</code> {{ response.description }}</li>
+            {% endfor %}
+            </ul>
+          </td>
+        </tr>
+      </table>
+    </article>
+  {% endfor %}
+  </section>
+  <h2 class="section-title">Schemas</h2>
+  <section class="grid">
+  {% for schema in schemas %}
+    <article class="card">
+      <h3>{{ schema.name }}</h3>
+      <div class="meta">type: {{ schema.type }}</div>
+      {% if schema.properties %}
+      <ul>
+      {% for prop in schema.properties %}
+        <li><code>{{ prop.name }}</code> : {{ prop.type }}</li>
+      {% endfor %}
+      </ul>
+      {% else %}
+      <p>Property 定義なし</p>
+      {% endif %}
+    </article>
+  {% endfor %}
+  </section>
+</main>
+</body>
+</html>

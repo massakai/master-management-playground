@@ -14,6 +14,7 @@
 - 要件定義: [docs/requirements.md](/Users/massakai/github/master-management-playground/docs/requirements.md)
 - 基本設計: [docs/basic-design.md](/Users/massakai/github/master-management-playground/docs/basic-design.md)
 - バックエンド詳細設計: [docs/backend-design.md](/Users/massakai/github/master-management-playground/docs/backend-design.md)
+- バックエンド起動手順: [backend/README.md](/Users/massakai/github/master-management-playground/backend/README.md)
 - フロントエンド詳細設計: [docs/frontend-design.md](/Users/massakai/github/master-management-playground/docs/frontend-design.md)
 - OpenAPI: [docs/openapi.yaml](/Users/massakai/github/master-management-playground/docs/openapi.yaml)
 - OpenAPI Preview: [docs/openapi-preview.html](/Users/massakai/github/master-management-playground/docs/openapi-preview.html)

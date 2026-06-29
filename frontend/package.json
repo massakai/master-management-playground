@@ -9,14 +9,17 @@
     "preview": "vite preview",
     "typecheck": "vue-tsc --noEmit"
   },
+  "engines": {
+    "node": ">=24 <25"
+  },
   "dependencies": {
     "vue": "^3.5.17"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^4.6.2",
-    "@types/node": "^16.18.126",
+    "@types/node": "^24.0.0",
+    "@vitejs/plugin-vue": "^6.0.7",
     "typescript": "^5.8.3",
-    "vite": "^4.5.14",
+    "vite": "^8.1.0",
     "vue-tsc": "^2.2.10"
   }
 }

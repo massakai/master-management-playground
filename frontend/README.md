@@ -47,6 +47,17 @@ npm run build
 
 `vue-tsc --noEmit` による型チェック後、`dist/` にビルド成果物を生成します。
 
+## Test
+
+画面テストを実行する場合は次を実行します。
+
+```sh
+cd frontend
+npm test
+```
+
+Vitest と Vue Test Utils を使い、jsdom 上で Vue コンポーネントの画面表示と操作を検証します。
+
 ## Preview
 
 ビルド済みの成果物をローカルで確認する場合は次を実行します。
@@ -60,6 +71,7 @@ npm run preview
 
 - `npm run dev`: Vite 開発サーバーを起動する
 - `npm run build`: 型チェックと本番ビルドを実行する
+- `npm test`: 画面テストを実行する
 - `npm run preview`: ビルド済み成果物を preview する
 - `npm run typecheck`: TypeScript / Vue の型チェックだけを実行する
 

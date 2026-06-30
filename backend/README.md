@@ -4,7 +4,7 @@
 
 ## Requirements
 
-- Java 17
+- Java 25
 
 ## Start
 

@@ -3,4 +3,7 @@
 .uv-cache/
 __pycache__/
 backend/.gradle/
+backend/.gradle-playwright/
 backend/build/
+frontend/playwright-report/
+frontend/test-results/

@@ -58,6 +58,16 @@ npm test
 
 Vitest と Vue Test Utils を使い、jsdom 上で Vue コンポーネントの画面表示と操作を検証します。
 
+E2E テストを実行する場合は次を実行します。
+
+```sh
+cd frontend
+npx playwright install chromium
+npm run test:e2e
+```
+
+Playwright がフロントエンドとバックエンドを自動起動し、一覧表示、CSV ダウンロード、CSV アップロードをブラウザ経由で検証します。
+
 ## Preview
 
 ビルド済みの成果物をローカルで確認する場合は次を実行します。
@@ -72,6 +82,7 @@ npm run preview
 - `npm run dev`: Vite 開発サーバーを起動する
 - `npm run build`: 型チェックと本番ビルドを実行する
 - `npm test`: 画面テストを実行する
+- `npm run test:e2e`: Playwright による E2E テストを実行する
 - `npm run preview`: ビルド済み成果物を preview する
 - `npm run typecheck`: TypeScript / Vue の型チェックだけを実行する
 

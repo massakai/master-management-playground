@@ -48,7 +48,7 @@ jobs:
           cache: gradle
 
       - name: Run tests
-        run: ./gradlew test
+        run: ./gradlew --no-daemon test
 
   e2e:
     name: E2E

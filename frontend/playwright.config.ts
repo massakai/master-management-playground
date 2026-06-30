@@ -32,7 +32,7 @@ export default defineConfig({
   ],
   webServer: [
     {
-      command: './gradlew bootRun',
+      command: './gradlew --no-daemon bootRun',
       cwd: backendDir,
       env: {
         ...process.env,
